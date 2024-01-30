@@ -62,15 +62,15 @@ while running:
             ball.move_ip(-abs(ball.left), 0)
         case [False, True]:
             bounceNormal = pygame.Vector2(-1, 0)
-            ball.move_ip(ball.right - rightBound, 0)
+            ball.move_ip(-abs(ball.right - rightBound), 0)
     
     match [ball.top < 0, ball.bottom > bottomBound]: # Get the 2D normals of the window (left and right)
         case [True, False]:
             bounceNormal = pygame.Vector2(0, -1)
-            ball.move_ip(abs(ball.top), 0)
+            ball.move_ip(0, -abs(ball.top))
         case [False, True]:
             bounceNormal = pygame.Vector2(0, 1)
-            ball.move_ip(ball.bottom - bottomBound, 0)
+            ball.move_ip(0, ball.bottom - bottomBound)
 
     if (ball.left < 0 or ball.right > rightBound) or (ball.top < 0 or ball.bottom > bottomBound): # Calculate how the vector should be reflected once hitting a surface
         velocity = (velocity - (2 * (velocity.dot(bounceNormal))) * bounceNormal) * .67
